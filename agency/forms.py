@@ -17,23 +17,3 @@ class ProfileForm(forms.ModelForm):
         fields = ('firstname', 'lastname','birth_date','interestedin',)
 
 
-
-'''class ProfileForm(forms.ModelForm):
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-    # previous_password = forms.PasswordInput()
-
-    class Meta:
-        model = Profile
-        fields = ('email','username','profileImage')
-'''
-class Userupdateform(forms.ModelForm):
-    email = forms.EmailField()
-
-    class Meta:
-        model = User
-        fields = ['username', 'email']
-
-class ProfileUpdateForm(forms.ModelForm):   
-    class Meta:
-        model = Profile
-        fields = ['image','bio','buyer']

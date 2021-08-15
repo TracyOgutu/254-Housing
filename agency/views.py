@@ -101,40 +101,8 @@ def display_profile(request,user_id):
         messages.info(request,'The user has not set a profile yet')
         return redirect('welcome')
 
-'''def profile(request):
-    if request.method == 'POST':
-        form = ProfileForm(request.POST)
-        if form.is_valid():
-            form.save()
-            current_site = get_current_site(request)
-            return redirect('welcome')
-    else:
-        print("hello")
-        form = ProfileForm()
-    return render(request, 'user-profile/edit_profile.html', {'form': form})
-'''
-
-def profile (request):
-      if request.method == 'POST':
-            u_form = Userupdateform(request.POST,instance=request.user)
-            p_form = ProfileUpdateForm(request.POST,
-                                       request.FILES,
-                                       instance=request.user.profile)
-            if u_form.is_valid() and p_form.is_valid():
-                u_form.save()
-                p_form.save()
-                messages.success(request, f'Your profile has been updated successfully!')
-                return redirect('welcome')
-      else:
-            u_form = Userupdateform(instance=request.user)
-            p_form = ProfileUpdateForm(instance=request.user.profile)
 
 
-      context={
-            'u_form':u_form,
-            'p_form':p_form,
-        }
-      return render(request,'user-profile/edit_profile.html',context)
 
 
 
