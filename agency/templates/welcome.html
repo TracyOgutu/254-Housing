@@ -1,5 +1,5 @@
 {% load bootstrap4 %}
-{%load staticfiles%}
+{%load static%}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,9 +45,19 @@
 	          <!-- <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li> -->
 	          <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
 			  {% if user.is_authenticated %}
-			  <li class="nav-item"><a href="#" class="nav-link">{{user.username}} Account</a></li>
+			  
 			  <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">logout</a></li>
-
+			  <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					{{user.username}} Account
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				  <a class="dropdown-item" href="{% url 'update_profile' %}">Edit Profile</a>
+				  <div class="dropdown-divider"></div>
+				  <a class="dropdown-item" href="{% url 'displayprofile' user.id %}">Display profile</a>
+				</div>
+			  </li>
+			  <!-- <li class="nav-item"><a href="#" class="nav-link">{{user.username}} Account</a></li> -->
 			  {% else %}
 			  <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">login</a></li> 
 			  <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link">signup</a></li>
@@ -185,8 +195,11 @@
 	            </div>
 	          </div>
 	          <div class="pb-md-5">
-							<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-							<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+							<p>Established in 2021, +254 Housing has emerged as Kenya's most preferred platform for buying and selling properties.
+								As we are new in the market, so too is our passion for excellence, as we consistently work to ensure the quality and authenticity of properties showcased in our platform remains second to none. Core to this operation is the 24/7 availability and moving services of +254 Housing that deliver complete bespoke property solutions.
+								
+							</p>
+							
 							<ul class="ftco-social d-flex">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -211,7 +224,7 @@
               </div>
               <div class="media-body p-2 mt-2">
                 <h3 class="heading mb-3">24/7 Contact</h3>
-                <p>A small river named Duden flows by their place and supplies.</p>
+                <p>We are available and accessible 24/7 including weekends and public holidays.</p>
               </div>
             </div>      
           </div>
@@ -224,7 +237,7 @@
               </div>
               <div class="media-body p-2 mt-2">
                 <h3 class="heading mb-3">Impeccable Service</h3>
-                <p>A small river named Duden flows by their place and supplies.</p>
+                <p>We produce A-level service in connecting buyers and sellers in a highly convenient way.</p>
               </div>
             </div>    
           </div>
@@ -237,7 +250,7 @@
               </div>
               <div class="media-body p-2 mt-2">
                 <h3 class="heading mb-3">Moving Facilities</h3>
-                <p>A small river named Duden flows by their place and supplies.</p>
+                <p>We offer trusted and timely moving services across the entire city of Nairobi.</p>
               </div>
             </div>      
           </div>
@@ -250,7 +263,8 @@
               </div>
               <div class="media-body p-2 mt-2">
                 <h3 class="heading mb-3">Serene Suites</h3>
-                <p>A small river named Duden flows by their place and supplies.</p>
+                <p>We give you extensive and bewilderingly luxurious suites to choose from.
+				</p>
               </div>
             </div>      
           </div>
@@ -266,21 +280,23 @@
           </div>
         </div>    		
     		<div class="row">
+				{%for house_item in all_houses%}
     			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
     				<div class="room">                                                                    
-    					<a href="rooms.html" class="img d-flex justify-content-center align-items-center" style="background-image: url('/static/images/room-1.jpg');">
+    					<a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url('{{house_item.house_image.url}}');">				
     						<div class="icon d-flex justify-content-center align-items-center">
     							<span class="icon-search2"></span>
     						</div>
     					</a>
     					<div class="text p-3 text-center">
-    						<h3 class="mb-3"><a href="rooms.html">Woodvale Apartments</a></h3>
-    						<p><span class="price mr-2">ksh 40,000.00</span> <span class="per">per month</span></p>
+    						<h3 class="mb-3"><a href="#">{{house_item.housename}}</a></h3>
+    						<p><span class="price mr-2">ksh {{house_item.price}}</span> <span class="per">per month</span></p>
     						<hr>
-    						<p class="pt-1"><a href="room-single.html" class="btn-custom">View Property Details <span class="icon-long-arrow-right"></span></a></p>
+    						<p class="pt-1"><a href="#" class="btn-custom">View Property Details <span class="icon-long-arrow-right"></span></a></p>
     					</div>
     				</div>
     			</div>
+				{%endfor%}
     			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
     				<div class="room">
     					<a href="rooms.html" class="img d-flex justify-content-center align-items-center" style="background-image: url('/static/images/room-2.jpg');">
@@ -341,7 +357,7 @@
     					</div>
     				</div>
     			</div>
-    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
+    			<!-- <div class="col-sm col-md-6 col-lg-4 ftco-animate">
     				<div class="room">
     					<a href="rooms.html" class="img d-flex justify-content-center align-items-center" style="background-image: url('/static/images/room-6.jpg');">
     						<div class="icon d-flex justify-content-center align-items-center">
@@ -355,7 +371,7 @@
     						<p class="pt-1"><a href="room-single.html" class="btn-custom">View Property Details <span class="icon-long-arrow-right"></span></a></p>
     					</div>
     				</div>
-    			</div>
+    			</div> -->
     		</div>
     	</div>
     </section>
@@ -615,7 +631,8 @@
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">+254 Housing</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <p>A multifaceted platform,engaged
+				   in showcasing property, & connecting buyers and sellers within the city of Nairobi.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
