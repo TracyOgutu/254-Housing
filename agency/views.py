@@ -16,13 +16,20 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes,force_text
 from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.template.loader import render_to_string
-from .forms import SignUpForm
+from .forms import SignUpForm,ProfileForm
 from .tokens import account_activation_token
+from .models import Profile, House
+from django.db import transaction
 
 
 # Create your views here.
 def welcome(request):
-    return render(request, 'welcome.html')
+    try:
+        all_houses=House.objects.all()
+    except ObjectDoesNotExist:
+        raise Http404()
+
+    return render(request, 'welcome.html',{"all_houses":all_houses})
 
 def signup(request):
     if request.method == 'POST':
@@ -32,7 +39,7 @@ def signup(request):
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
-            subject = 'Activate Your Citrons Account'
+            subject = 'Activate Your +254 Housing Account'
             message = render_to_string('account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,
@@ -65,6 +72,34 @@ def activate(request, uidb64, token):
     else:
         return render(request, 'account_activation_invalid.html')
 
+@login_required
+@transaction.atomic
+def update_profile(request):
+    if request.method == 'POST':
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        if profile_form.is_valid():
+            profile_form.save()
+            messages.success(request,('Your profile was successfully updated!'))
+            return redirect('welcome')
+        else:
+            messages.error(request, ('Please correct the error below.'))
+    else:
+        profile_form = ProfileForm(instance=request.user.profile)
+    return render(request, 'editprofile.html', {
+        'profile_form': profile_form
+    })
+
+@login_required
+def display_profile(request,user_id):
+    '''
+    View for displaying the profile for a single user
+    '''
+    try:
+        single_profile=Profile.single_profile(user_id)              
+        return render(request,'profiledisplay.html',{"profile":single_profile})
+    except Profile.DoesNotExist:
+        messages.info(request,'The user has not set a profile yet')
+        return redirect('welcome')
 
 
 
