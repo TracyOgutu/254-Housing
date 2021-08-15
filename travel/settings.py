@@ -132,9 +132,20 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_REDIRECT_URL = 'welcome'
+
+#CLOUDINARY
+cloudinary.config( 
+    cloud_name=config('CLOUD_NAME'), 
+    api_key=config('CLOUDINARY_API_KEY'), 
+    api_secret=config('CLOUDINARY_API_SECRET') 
+)
+
 
 #EMAIL VERIFICATION
 # For Django Email Backend
