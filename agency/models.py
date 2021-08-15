@@ -6,8 +6,38 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from tinymce.models import HTMLField
 
+
+
+# class CustomUserManager(BaseUserManager):
+#     def create_user(self, registration_no, email, password=None):
+
+        
+#         if not email:
+#             raise ValueError('A valid email address must be given!')
+
+#         user = self.model(
+#             email=self.normalize_email(email),
+#         )
+
+#         user.set_password(password)
+#         user.save(using=self._db)
+#         return user
+
+#     def create_superuser(self, registration_no, email, password):
+#         user = self.create_user(
+#             email,
+#             password=password,
+#             )
+#         user.is_admin = True
+#         user.save(using=self._db)
+#         return 
+
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user= models.OneToOneField(User,on_delete=models.CASCADE)
+    bio = models.TextField(null=True)
+    image = models.ImageField(upload_to='profile',default='profile/default.png')
+    buyer = models.BooleanField(default=False)
+
     email_confirmed = models.BooleanField(default=False)
     interestedin= models.CharField(max_length=200, blank=True)
     firstname = models.CharField(max_length=30, blank=True)
@@ -49,6 +79,17 @@ class House(models.Model):
     def __str__(self):
         return self.housename
 
+class House(models.Model):
+    houseName = models.CharField(max_length=100)
+    description = models.TextField()
+    image = models.ImageField(upload_to='houses')
+    location = models.CharField(max_length=100)
+    rooms = models.IntegerField()
+    price = models.IntegerField()
+    published = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.houseName
 
 
 

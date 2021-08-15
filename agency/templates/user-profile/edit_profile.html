@@ -1,0 +1,31 @@
+{% extends "template-base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} Edit profile {% endblock %}
+
+{% block form %}
+
+
+<!-- start of form -->
+<div class="container">
+    <div class="row d-flex justify-content-center"> 
+    <form method="post" class="bg-white  py-5 contact-form" >
+      {% csrf_token %}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4 bg-dark text-white rounded p-5 text-center font-weight-bolder" style="font-size:30px">
+            Update your Profile
+        </legend>
+
+        {{ u_form|crispy }}
+        {{ p_form|crispy }}
+
+    </fieldset>
+<div class="form-group">
+
+<button class="btn btn-outline-info" type="submit" style="border-radius: 20px;">Update</button>
+</div>
+    </form>
+    </div>
+  </div>
+    <!-- end of form -->
+{% endblock %}

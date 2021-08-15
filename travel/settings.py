@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY=config('SECRET_KEY')
+SECRET_KEY="+-3if=8sbfp16ep*!u991#*)v-k38#^2b7^&jf!*h4m@r_-djx"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'agency',
     'bootstrap4',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,7 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+   # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'travel.urls'
@@ -76,16 +77,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'travel.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'housing',
-        'USER': 'tracy',
-        'PASSWORD':'Wakanda2030',      
+         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'sqlite3.db',      
     }
 }
 
@@ -150,11 +148,12 @@ cloudinary.config(
 #EMAIL VERIFICATION
 # For Django Email Backend
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST=config('EMAIL_HOST')
-EMAIL_PORT=config('EMAIL_PORT')
-EMAIL_HOST_USER=config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
-EMAIL_USE_SSL=config('EMAIL_USE_SSL')
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '465'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
 
 
 
