@@ -7,6 +7,7 @@
 
 	"use strict";
 
+
 	var isMobile = {
 		Android: function() {
 			return navigator.userAgent.match(/Android/i);
@@ -29,6 +30,8 @@
 	};
 
 
+
+
 	$(window).stellar({
     responsive: true,
     parallaxBackgrounds: true,
@@ -39,6 +42,8 @@
   });
 
 
+	
+	
 	var fullHeight = function() {
 
 		$('.js-fullheight').css('height', $(window).height());
@@ -131,6 +136,8 @@
 			}
 		});
 
+
+
 	};
 	carousel();
 
@@ -152,6 +159,8 @@
 			$this.find('.dropdown-menu').removeClass('show');
 		// }, 100);
 	});
+
+
 
 
 	$('#dropdown04').on('show.bs.dropdown', function () {
@@ -283,6 +292,8 @@
 	contentWayPoint();
 
 
+
+
 	// navigation
 	var OnePageNav = function() {
 		$(".smoothscroll[href^='#'], #ftco-nav ul li a[href^='#']").on('click', function(e) {
@@ -327,7 +338,10 @@
       enabled: true,
       duration: 300 // don't foget to change the duration also in CSS
     }
-  });
+	});
+	
+
+	
 
   $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
     disableOn: 700,
@@ -339,11 +353,19 @@
     fixedContentPos: false
   });
 
+	
+	
+	
+	
+	
 
   $('.checkin_date, .checkout_date').datepicker({
 	  'format': 'm/d/yyyy',
 	  'autoclose': true
 	});
+
+
+
 
 
 

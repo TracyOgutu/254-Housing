@@ -140,6 +140,7 @@
 		}
 	};
 
+
 	Datepicker.prototype = {
 		constructor: Datepicker,
 
@@ -263,6 +264,7 @@
 				o.orientation.y = _plc[0] || 'auto';
 			}
 		},
+
 		_events: [],
 		_secondaryEvents: [],
 		_applyEvents: function(evs){
@@ -407,6 +409,7 @@
 			});
 		},
 
+
 		show: function(){
 			if (!this.isInline)
 				this.picker.appendTo('body');
@@ -537,6 +540,7 @@
 			this.updateNavArrows();
 		},
 
+
 		place: function(){
 			if (this.isInline)
 				return;
@@ -602,6 +606,7 @@
 			});
 		},
 
+
 		_allow_update: true,
 		update: function(){
 			if (!this._allow_update)
@@ -628,6 +633,7 @@
 					dates = [dates];
 				delete this.element.data().date;
 			}
+
 
 			dates = $.map(dates, $.proxy(function(date){
 				return DPGlobal.parseDate(date, this.o.format, this.o.language);
@@ -755,6 +761,7 @@
 						.toggle(this.o.clearBtn !== false);
 			this.updateNavArrows();
 			this.fillMonths();
+
 			var prevMonth = UTCDate(year, month-1, 28),
 				day = DPGlobal.getDaysInMonth(prevMonth.getUTCFullYear(), prevMonth.getUTCMonth());
 			prevMonth.setUTCDate(day);
@@ -832,6 +839,7 @@
 				months.slice(endMonth+1).addClass('disabled');
 			}
 
+
 			html = '';
 			year = parseInt(year/10, 10) * 10;
 			var yearCont = this.picker.find('.datepicker-years')
@@ -899,6 +907,7 @@
 					break;
 			}
 		},
+
 
 		click: function(e){
 			e.preventDefault();
@@ -1051,6 +1060,7 @@
 				this.hide();
 			}
 		},
+
 
 		moveMonth: function(date, dir){
 			if (!date)
@@ -1315,6 +1325,7 @@
 		}
 	};
 
+
 	function opts_from_el(el, prefix){
 		// Derive options from element data-attrs
 		var data = $(el).data(),
@@ -1388,6 +1399,7 @@
 			return this;
 	};
 
+
 	var defaults = $.fn.datepicker.defaults = {
 		autoclose: false,
 		beforeShowDay: $.noop,
@@ -1414,6 +1426,7 @@
 		'format',
 		'rtl',
 		'weekStart'
+
 	];
 	$.fn.datepicker.Constructor = Datepicker;
 	var dates = $.fn.datepicker.dates = {
@@ -1649,6 +1662,9 @@
 	};
 
 
+
+
+
 	/* DATEPICKER DATA-API
 	* ================== */
 
@@ -1669,3 +1685,11 @@
 	});
 
 }(window.jQuery));
+
+
+
+
+
+
+
+

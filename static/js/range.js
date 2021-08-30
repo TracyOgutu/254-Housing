@@ -13,7 +13,11 @@
         	slide2 = parseFloat(rangeS[1].value);
 
       if (slide1 > slide2) {
-				[slide1, slide2] = [slide2, slide1];
+        [slide1, slide2] = [slide2, slide1];
+        
+
+
+
         // var tmp = slide2;
         // slide2 = slide1;
         // slide1 = tmp;
@@ -35,6 +39,9 @@
         numberS[1].value = tmp;
       }
 
+
+
+      
       rangeS[0].value = number1;
       rangeS[1].value = number2;
 
