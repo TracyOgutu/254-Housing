@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*',]
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'cloudinary',
     'agency',
     'bootstrap4',
@@ -42,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tinymce',
     'django_email_verification',
+    'paypal.standard.ipn',
+    
 ]
 
 MIDDLEWARE = [
@@ -82,12 +85,19 @@ WSGI_APPLICATION = 'travel.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'housing',
-        'USER': 'tracy',
-        'PASSWORD':'Wakanda2030',      
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME':'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'housing',
+#         'USER': 'tracy',
+#         'PASSWORD':'Wakanda2030',      
+#     }
+# }
 
 
 # Password validation
@@ -156,4 +166,6 @@ EMAIL_HOST_USER=config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL=config('EMAIL_USE_SSL')
 
-
+PAYPAL_RECEIVER_EMAIL='tracyogutu@gmail.com'
+PAYPAL_TEST = True
+FIXER_ACCESS_KEY=config('FIXER_ACCESS_KEY')

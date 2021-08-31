@@ -1,0 +1,105 @@
+{%extends 'template-base.html'%}
+{% load bootstrap4 %}
+{%load staticfiles%}
+
+{%block nav%}
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="{%url 'welcome' %}">+254 Housing</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+            aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="{% url 'welcome' %}" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{%endblock%}
+
+{%block slider%}
+
+{%endblock%}
+
+{% block content %}
+{{block.super}}
+
+<div class="hero-wrap" style="background-image: url('/static/images/bg_1.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+            <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+                <div class="text">
+                    <p class="breadcrumbs mb-2" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+                        <span class="mr-2"><a href="{%url 'welcome' %}">Home</a></span>
+
+                        <span>Home</span>
+                    </p>
+                    <h1 class="mb-4 bread">Contact Us</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section contact-section bg-light">
+    <div class="container">
+      <div class="row d-flex mb-5 contact-info">
+        <div class="col-md-12 mb-4">
+          <h2 class="h3">Contact Information</h2>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-md-3 d-flex">
+            <div class="info bg-white p-4">
+              <p><span>Address:</span> Harambee Avenue, KICC</p>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex">
+            <div class="info bg-white p-4">
+              <p><span>Phone:</span> <a href="tel://1234567920">+ 254 711 111 111</a></p>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex">
+            <div class="info bg-white p-4">
+              <p><span>Email:</span> <a href="mailto:info@+254Housing.com">info@+254Housing.com</a></p>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex">
+            <div class="info bg-white p-4">
+              <p><span>Website</span> <a href="#">+254Housing.com</a></p>
+            </div>
+        </div>
+      </div>
+      <div class="row block-9">
+        <div class="col-md-6 order-md-last d-flex">
+          <form action="{% url 'send_email' %}" class="bg-white p-5 contact-form" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Your Email" name="email">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Subject" name="subject">
+            </div>
+            <div class="form-group">
+              <textarea cols="30" rows="7" class="form-control" placeholder="Message" name="message"></textarea>
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+            </div>
+          </form>
+        
+        </div>
+
+        <div class="col-md-6 d-flex">
+            <div id="map" class="bg-white"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%endblock%}

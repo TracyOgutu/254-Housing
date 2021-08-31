@@ -2,6 +2,9 @@
 {% load bootstrap4 %}
 {%load staticfiles%}
 
+{%block nav%}
+{%endblock%}
+
 {%block slider%}
 
 {%endblock%}
@@ -17,7 +20,7 @@
         <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
           <div class="text">
             <p class="breadcrumbs mb-2"><span class="mr-2"><a href="{% url 'welcome' %}">Home</a></span> <span>+254 Housing</span></p>
-            <h1 class="mb-4 bread">Edit Profile</h1>
+            <h1 class="mb-4 bread">Make Review</h1>
           </div>
         </div>
       </div>
@@ -25,13 +28,13 @@
   </div>
   <!-- end of top section -->
   
-  <!-- start of form -->
+  <!-- start of review form -->
     <div class="container">
       <div class="row"> 
-        <form method="post" class="bg-white p-5 contact-form" style="margin-left: 33%;">
+        <form action="{%url 'make_review'%}" method="post" class="bg-white p-5 contact-form" enctype="multipart/form-data" style="margin-left: 33%;">
           {% csrf_token %}
-          {{ profile_form.as_p }}
-          <button type="submit" class="btn btn-secondary">Save changes</button>
+          {% bootstrap_form form%}
+          <button type="submit" class="btn btn-secondary">Post</button>
         </form>
           
       </div>
@@ -39,5 +42,5 @@
     <!-- end of form -->
   
     {%endblock%}
-
+    
    

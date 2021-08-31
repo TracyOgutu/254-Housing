@@ -1,0 +1,89 @@
+{%extends 'template-base.html'%}
+{% load bootstrap4 %}
+{%load staticfiles%}
+
+{%block nav%}
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="{%url 'welcome' %}">+254 Housing</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+            aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="{% url 'welcome' %}" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{%endblock%}
+
+{%block slider%}
+
+{%endblock%}
+
+{% block content %}
+{{block.super}}
+
+<div class="hero-wrap" style="background-image: url('/static/images/apartment5.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+            <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+                <div class="text">
+                    <p class="breadcrumbs mb-2" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+                        <span class="mr-2"><a href="{%url 'welcome' %}">Home</a></span>
+
+                        <span>Wishlist</span>
+                    </p>
+                    <h1 class="mb-4 bread">Wishlist</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section">
+    <div class="container">
+      <div class="row d-flex">
+        {%for wish in wishitems%}
+        <form action="{% url 'makebooking' %}" method='post' enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="col-md-3 d-flex ftco-animate">
+          <div class="blog-entry align-self-stretch">
+            <a href="{% url 'singlehouse' wish.house.id %}" class="block-20" style="background-image: url('{{wish.house.house_image.url}}');">
+            </a>
+            <div class="text mt-3 d-block">
+                <h3 class="heading mt-3"><a href="{% url 'singlehouse' wish.house.id %}">{{wish.house.housename}}</a></h3>
+              <div class="meta mb-3">
+                <div><a href="#">Price: {{wish.house.price}}</a></div>
+                <div><a href="#">Bedrooms: {{wish.house.number_of_bedrooms}}</a></div>
+                <div><a href="#">Booking Fee: {{wish.house.booking_fee}}</a></div>
+                <div><a href="#">Contract type: {{wish.house.contract_type}}</a></div>
+
+              </div>
+              <div style=" margin-bottom: 5%;">
+                <button class="btn btn-danger"><a href="{%url 'deletefromwishlist' wish.house.id %}" style="color: white;">Remove from wishlist</a></button>
+              </div>
+              
+              
+              <td >                                                            
+                <input type="text" id="house_id" name="house_id" style="visibility:hidden;" value="{{wish.house.id}}">                            
+                <input type="submit" style="margin-top: -24%;" class="btn btn-info" value="Book this property" id="addbutton">                            
+            </td>  
+            
+            </div>
+          </div>
+        </div>
+        </form>
+        {%endfor%}
+        </div>
+        </div>
+        </section>
+
+
+{%endblock%}

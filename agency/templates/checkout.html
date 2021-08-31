@@ -1,0 +1,104 @@
+{%extends 'template-base.html'%}
+{% load bootstrap4 %}
+{%load staticfiles%}
+
+{%block nav%}
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="{%url 'welcome' %}">+254 Housing</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+            aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="{% url 'welcome' %}" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{%endblock%}
+
+{%block slider%}
+
+{%endblock%}
+
+{% block content %}
+{{block.super}}
+
+<div class="hero-wrap" style="background-image: url('/static/images/apartment5.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+            <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+                <div class="text">
+                    <p class="breadcrumbs mb-2" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+                        <span class="mr-2"><a href="{%url 'welcome' %}">Home</a></span>
+
+                        <span>Checkout</span>
+                    </p>
+                    <h1 class="mb-4 bread">Checkout</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section">
+    <div class="container">
+        {%if cart%}
+            
+        <h1>Booking Fee:<br> Ksh:{{cart.total}}</h1>
+         
+     {%endif%}
+      <div class="row d-flex">
+        {%if book_house%}
+        {%for wish in book_house%}
+       
+        
+        <div class="col-md-3 d-flex ftco-animate">
+          <div class="blog-entry align-self-stretch">
+            <a href="{% url 'singlehouse' wish.bookedhouse.id %}" class="block-20" style="background-image: url('{{wish.bookedhouse.house_image.url}}');">
+            </a>
+            <div class="text mt-3 d-block">
+                <h3 class="heading mt-3"><a href="{% url 'singlehouse' wish.bookedhouse.id %}">{{wish.bookedhouse.housename}}</a></h3>
+              <div class="meta mb-3">
+                <div><a href="#">Bedrooms: {{wish.bookedhouse.number_of_bedrooms}}</a></div>
+                <div><a href="#">Booking Fee: {{wish.bookedhouse.booking_fee}}</a></div>
+                <div><a href="#">Contract type: {{wish.bookedhouse.contract_type}}</a></div>
+
+              </div>
+              <button class="btn btn-danger"><a href="{%url 'deletefrombooking' wish.bookedhouse.id %}" style="color: white;">Cancel and clear from cart</a></button>
+             
+             
+            
+            </div>
+          </div>
+        </div>
+      
+        {%endfor%}
+        <div>
+            <div class="card" style="border: 1px solid #01A6A9;width:200px;margin-top: 30%;">
+                <h4 class="text-center">Pay with PayPal</h4>
+                {% csrf_token %}
+                {{ form.render }} 
+            </div>   
+        </div>
+
+        </div>
+
+        {%else%}
+
+            <div>
+                <h5>You haven't added a house to your cart just yet</h5>
+                
+            </div>
+            {%endif%}
+        </div>
+        </section>
+
+
+{%endblock%}

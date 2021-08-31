@@ -8,4 +8,3 @@ admin.site.site_title  =  "+254 Housing admin site"
 admin.site.index_title  =  "+254 Housing Admin"
 
 
-
